@@ -42,13 +42,13 @@ class CryptoState():
     def __init__(self):
         if(os.path.isfile(self._coin_backup_file) and os.path.isfile(self._table_backup_file)):
             with open(self._coin_backup_file, "r") as backup_file:
-                coin = backup_file.read()
+                coin = backup_file.read().strip()
             with open(self._table_backup_file, "r") as backup_file:
                 coin_table = json.load(backup_file)
             self.current_coin = coin
             self.coin_table = coin_table
         else:
-            current_coin = config.get(USER_CFG_SECTION, 'current_coin')
+            current_coin = config.get(USER_CFG_SECTION, 'current_coin').strip()
             if (not current_coin in supported_coin_list):
                 exit(
                     "***\nERROR!\nSince there is no backup file, a proper coin name must be provided at init\n***")
